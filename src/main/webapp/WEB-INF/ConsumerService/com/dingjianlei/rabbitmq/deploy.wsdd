@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ConsumerService WSDL service -->
+
+  <service name="Consumer" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://rabbitmq.dingjianlei.com"/>
+      <parameter name="wsdlServiceElement" value="ConsumerService"/>
+      <parameter name="schemaQualified" value="http://lang.mchange.com,http://resourcepool.v2.mchange.com,http://rabbitmq.dingjianlei.com"/>
+      <parameter name="wsdlServicePort" value="Consumer"/>
+      <parameter name="className" value="com.dingjianlei.rabbitmq.Consumer"/>
+      <parameter name="wsdlPortType" value="Consumer"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://rabbitmq.dingjianlei.com" name="main" qname="operNS:main" soapAction="">
+        <parameter xmlns:pns="http://rabbitmq.dingjianlei.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:args" type="tns:string"/>
+        <fault xmlns:fns="http://rabbitmq.dingjianlei.com" xmlns:tns="http://resourcepool.v2.mchange.com" name="TimeoutException" qname="fns:fault" class="com.mchange.v2.resourcepool.TimeoutException" type="tns:TimeoutException"/>
+      </operation>
+      <parameter name="allowedMethods" value="main"/>
+
+      <arrayMapping xmlns:ns="http://rabbitmq.dingjianlei.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:&gt;main" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://resourcepool.v2.mchange.com" qname="ns:TimeoutException" type="java:com.mchange.v2.resourcepool.TimeoutException" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://rabbitmq.dingjianlei.com" qname="ns:&gt;mainResponse" type="java:com.dingjianlei.rabbitmq.MainResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://lang.mchange.com" qname="ns:PotentiallySecondaryException" type="java:com.mchange.lang.PotentiallySecondaryException" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://resourcepool.v2.mchange.com" qname="ns:ResourcePoolException" type="java:com.mchange.v2.resourcepool.ResourcePoolException" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

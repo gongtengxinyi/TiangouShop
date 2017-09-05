@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://rabbitmq.dingjianlei.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://rabbitmq.dingjianlei.com" xmlns:intf="http://rabbitmq.dingjianlei.com" xmlns:tns1="http://resourcepool.v2.mchange.com" xmlns:tns2="http://lang.mchange.com" xmlns:tns3="http://lang.java" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://rabbitmq.dingjianlei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://resourcepool.v2.mchange.com"/>
+   <import namespace="http://lang.mchange.com"/>
+   <import namespace="http://lang.java"/>
+   <element name="main">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="args" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="mainResponse">
+    <complexType/>
+   </element>
+   <element name="fault" type="tns1:TimeoutException"/>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://lang.mchange.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://resourcepool.v2.mchange.com"/>
+   <import namespace="http://lang.java"/>
+   <complexType name="PotentiallySecondaryException">
+    <sequence>
+     <element name="nestedThrowable" nillable="true" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://resourcepool.v2.mchange.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://lang.mchange.com"/>
+   <import namespace="http://lang.java"/>
+   <complexType name="ResourcePoolException">
+    <complexContent>
+     <extension base="tns2:PotentiallySecondaryException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="TimeoutException">
+    <complexContent>
+     <extension base="tns1:ResourcePoolException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="TimeoutException">
+
+      <wsdl:part element="impl:fault" name="fault">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="mainResponse">
+
+      <wsdl:part element="impl:mainResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="mainRequest">
+
+      <wsdl:part element="impl:main" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Consumer">
+
+      <wsdl:operation name="main">
+
+         <wsdl:input message="impl:mainRequest" name="mainRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:mainResponse" name="mainResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:TimeoutException" name="TimeoutException">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ConsumerSoapBinding" type="impl:Consumer">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="main">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="mainRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="mainResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="TimeoutException">
+
+            <wsdlsoap:fault name="TimeoutException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ConsumerService">
+
+      <wsdl:port binding="impl:ConsumerSoapBinding" name="Consumer">
+
+         <wsdlsoap:address location="http://localhost:8080/TiangouShop/services/Consumer"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

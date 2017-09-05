@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<beans xmlns="http://www.springframework.org/schema/beans"    
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:aop="http://www.springframework.org/schema/aop"   
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:jee="http://www.springframework.org/schema/jee"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/mvc   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+	
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">    
+        ssm 商城 redis mongodb websocket 天狗商城 rabbitmq
+#                  天狗商城
+**********初衷********
+
+想把javaee框架集中做一个项目，包含了solr，redis，mongodb，rabbitmq，ssm等技术
+
+把以前学过的东西 整合一下，大体包含了spring+springmvc+mybatis的整合，缓存技术redis的 使用，
+
+文档性数据库mongodb的使用，solr全文搜索的初步，
+消息队列rabbitmq的初级使用
+**************题外*****************
+目前经费不足，源码不公开~ 需要的加qq1251272104 微信 kenan13687672481
+
+![image](https://github.com/gongtengxinyi/leChatTv/blob/master/src/test/java/com/example/demo/1.png)
+
+
+
+
+<mvc:annotation-driven/>	
+<mvc:default-servlet-handler />  
+	<!-- 视图解析器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+	<mvc:resources  location="/WEB-INF/css/" mapping="/css/**"/>
+	<mvc:resources  location="/WEB-INF/images/" mapping="/images/**"/>
+		<mvc:resources  location="/WEB-INF/uploads/" mapping="/uploads/**"/>
+		<mvc:resources  location="/WEB-INF/dist/" mapping="/dist/**"/>
+		<mvc:resources  location="/WEB-INF/json/" mapping="/json/**"/>
+			<mvc:resources  location="/WEB-INF/" mapping="/**"/>
+				<mvc:resources  location="/WEB-INF/ckplayer/" mapping="/ckplayer/**"/>
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		
+		<property name="defaultEncoding" value="UTF-8"/>  
+	    <property name="maxUploadSize" value="10000000"/>
+
+	</bean>
+ 
+	<context:component-scan base-package="com.tiangou.controller,com.tiangou.cache" />
+</beans>  

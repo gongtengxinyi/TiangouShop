@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiangou.mapper.IndentMapper" >
+  <resultMap id="BaseResultMap" type="com.tiangou.entity.Indent" >
+     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <association property="indentContact" javaType="IndentContact" >
+                <result column="ownerName" property="ownerName" jdbcType="VARCHAR" />
+                 <result column="ownerMobile" property="ownerMobile" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectOneIndent" parameterType="String" resultMap="BaseResultMap">
+  select * from indent where id=#{id}
+  </select>
+ <insert id="insertOneIndent" parameterType="Indent">
+ insert into indent (id,name,address,createDate,price) values(#{id},#{name},#{address},#{createDate},#{price})
+ </insert>
+ <delete id="deleteOneIndent" parameterType="String">
+ delete from indent where id=#{id}
+ </delete>
+ </mapper>
