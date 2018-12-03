@@ -9,10 +9,5 @@
 消息队列rabbitmq的初级使用
 
 
-
-
-**************题外*****************
-目前经费不足，源码不公开~ 需要的加qq1251272104 微信 kenan13687672481
-
 ![image](https://github.com/gongtengxinyi/leChatTv/blob/master/src/test/java/com/example/demo/1.png)
 
